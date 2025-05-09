@@ -16,7 +16,7 @@ def solution(numbers):
     #             if numbers[i+1] > val:
     #                 answer[index] = numbers[i+1]
     #     else:
-    #         dq.append((i,numbers[i]))
+    #         dq.append((i,numbers[i])) 
     return answer
 
 # numbers = [2, 3, 3, 5]
