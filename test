@@ -1,0 +1,419 @@
+# def solution(players, callings):
+#     answer = []
+#     play_dict = {play: index for index,play in enumerate(players)}
+
+#     for call in callings:
+#         f = play_dict[call]
+#         play_dict[call] -=1
+#         play_dict[players[f-1]] +=1
+
+#         players[f], players[f-1] = players[f-1], players[f]
+
+#     return players
+
+# players = ['mumu','soe','poe','kai','mine']
+# callings = ['kai','kai','mine','mine']
+# print(solution(players, callings))
+
+#       ////////공원산책
+# def solution(park, routes):
+#     move ={'N':(-1,0), 'S':(1,0), 'W':(0,-1), 'E': (0,1)}
+
+#     H = len(park)
+#     W = len(park[0])
+
+#     for i in range(H):
+#         for j in range(W):
+#             if park[i][j] == 'S':
+#                 x,y = i , j
+#                 break
+
+#     for route in routes:
+#         direction, step = route.split()
+#         step = int(step)
+#         nx, ny = x,y
+#         for _ in range(step):
+#             nx += move[direction][0]
+#             ny += move[direction][1]
+
+#             if not (0<= nx < H and 0<= ny < W):
+#                 break
+
+#             if park[nx][ny] =='X':
+#                 break
+#         else:
+#             x,y = nx,ny
+
+#     return [x,y]
+# move = {'N': (-1, 0), 'S': (1, 0), 'W': (0, -1), 'E': (0, 1)}
+# park= ["SOO","OOO","OOO"]
+# routes = ["E 2","S 2","W 1"]
+# print(solution(park,routes))
+
+# ///바탕화면정리
+# def solution(wallpaper):
+#     xArr = []
+#     yArr = []
+#     X = len(wallpaper)
+#     Y = len(wallpaper[0])
+
+#     for x in range(X):
+#         for y in range(Y):
+#             if wallpaper[x][y] =="#":
+#                 xArr.append(x)
+#                 yArr.append(y)
+#     lux = min(xArr)
+#     luy = min(yArr)
+
+#     rdx = max(xArr)+1
+#     rdy = max(yArr)+1
+
+#     return [lux,luy,rdx,rdy]
+# wallpaper = [".#...", "..#..", "...#."]
+# print(solution(wallpaper))
+
+# //덧칠하기
+# def solution(n, m, section):
+
+#     section.sort()
+#     current = 0
+#     answer = 0
+#     for i in section:
+#         if i>current:
+#             answer +=1
+#             current = m+i -1
+#     return answer
+
+
+# n = 5
+# m = 4
+# section = [2,3,6]
+# print(solution(n,m,section))
+
+# // 대충만든자판
+# def solution(keymap, targets):
+#     key_dict = {}
+#     answer = []
+#     for key in keymap:
+#         for index, k in enumerate(key):
+#             if k in key_dict:
+#                 key_dict[k] = min(key_dict[k],index+1)
+#             else:
+#                 key_dict[k] = index+1
+#     for target in targets:
+#         ans = 0
+#         for t in target:
+#             if not(t in key_dict):
+#                 ans = -1
+#                 break
+#             else:
+#                 ans +=key_dict[t]
+#         answer.append(ans)
+#     print(key_dict)
+#     return answer
+
+# keymap = ["AGZ", "BSSS"]
+# targets = ["ASA","BGZ"]
+# print(solution(keymap, targets))
+
+# // 카드 뭉치
+# def solution(cards1, cards2, goal):
+#     answer = ''
+#     while len(goal)>0:
+#         if len(cards1)>0 and goal[0] == cards1[0]:
+#             cards1.pop(0)
+#             goal.pop(0)
+#             continue
+#         elif len(cards2)>0 and  goal[0] == cards2[0]:
+#             cards2.pop(0)
+#             goal.pop(0)
+#             continue
+#         else:
+#             answer = 'No'
+#             break
+#     else:
+#         answer='Yes'
+#     return answer
+
+# cards1 =["i", "water","drink"]
+# cards2 =["want", "to"]
+# goal = ["i", "want", "to", "drink", "water"]
+# print(solution(cards1,cards2, goal))
+
+
+# // 크키가 작은 부분문자열
+# def solution(t, p):
+#     answer = 0
+#     diff = len(t) - len(p) +1
+
+#     for i in range(0,diff):
+#         num = t[i:i+len(p)]
+#         if int(num)<=int(p):
+#             answer +=1
+#     return answer
+
+# t = "500220839878"
+# p = "7"
+
+# print(solution(t,p))
+
+# // 가장 가까운 같은 글자
+# def solution(s):
+#     answer = []
+#     record = {}
+#     for i, n in enumerate(s):
+#         if n in record:
+#             answer.append(i-record[n])
+#         else:
+#             answer.append(-1)
+#         record[n] = i
+
+#     return answer
+
+# s = 'banana'
+# print(solution(s))
+
+
+# //명예의 전당
+# def solution(k, score):
+#     scoreBoard = []
+#     answer = []
+
+#     for i, s in enumerate(score):
+#         if i<k:
+#             scoreBoard.append(s)
+#         elif s>scoreBoard[0]:
+#             scoreBoard.pop(0)
+#             scoreBoard.append(s)
+#         scoreBoard=sorted(scoreBoard)
+#         answer.append(scoreBoard[0])
+
+#     return answer
+
+# k=3
+# score=[10, 100, 20, 150, 1, 100, 200]
+# print(solution(k,score))
+
+# //과일 장수
+
+# def solution(k, m, score):
+#     score = sorted(score,reverse=True)
+#     answer = 0
+#     for i in range(0,len(score)//m*m,m):
+#         answer += m*min(score[i:i+m])
+
+#     return answer
+
+# while len(score)>m:
+#     box = []
+#     for i in range(0,m):
+#         box.append(score[0])
+#         score.pop(0)
+#     minbox = min(box)
+#     answer+= minbox*m
+# k =3
+# m = 4
+# score = [1, 2, 3, 1, 2, 3, 1]
+# print(solution(k,m,score))
+
+# def solution(food):
+#     answer = ''
+#     for idx, n in enumerate(food):
+#         answer+= (n//2) *str(idx)
+
+#     return answer + '0'+answer[::-1]
+# food = [1, 3, 4, 6]
+# print(solution(food))
+
+# def solution(babbling):
+#     can_s = ['aya', 'ye', 'woo', 'ma']
+#     cant_s = ['ayaaya', 'yeye', 'woowoo', 'mama']
+#     answer = 0
+#     for word in babbling:
+#         for i in cant_s:
+#             if i in word:
+#                 word = word.replace(i,'x')
+
+#         for i in can_s:
+#             if i in word:
+#                 word = word.replace(i,'1')
+
+#         word = word.replace('1','')
+#         if word =='':
+#             answer +=1
+#     return answer
+
+# babbling = ["ayaye", "uuu", "yeye", "yemawoo", "ayaayaa"]
+# print(solution(babbling))
+
+
+# //콜라문제
+# another Answer
+# def solution(a, b, n):
+#     returnValue = True
+#     cnt = 0
+
+#     while returnValue:
+#         if n // a == 0:
+#             returnValue = False
+
+#         cnt += (n//a)*b
+#         n = n - (n//a)*a + (n//a)*b
+
+#     answer = cnt
+#     return answer
+
+# def solution(a, b, n):
+#     answer = 0
+#     while n>0:
+#         rest = 0
+#         if(n//a ==0):
+#             break
+#         answer += (n//a)*b
+#         rest+= n%a
+#         n = (n//a)*b + rest
+#     return answer
+# a = 3
+# b = 1
+# n = 20
+# print(solution(a,b,n))
+
+
+# //삼총사
+# def solution(number):
+#     answer = 0
+#     for i in range(0,len(number)-2):
+#         for j in range(i+1,len(number)-1):
+#             for k in range(j+1,len(number)):
+#                 if number[i]+number[j]+number[k] ==0:
+#                     answer+=1
+#     return answer
+
+# number = [-2, 3, 0, 2, -5]
+# print(solution(number))
+
+# //혼자서 하는 틱택토
+# def solution(board):
+#     answer = 1
+#     bingo = [
+#         [1, 2, 3],
+#         [4, 5, 6],
+#         [7, 8, 9],
+#         [1, 4, 7],
+#         [2, 5, 8],
+#         [3, 6, 9],
+#         [1, 5, 9],
+#         [3, 5, 7],
+#     ]
+#     O_Arr = []
+#     X_Arr = []
+#     loc_O = []
+#     loc_X = []
+#     O_flag = False
+#     X_flag = False
+#     for index, mark in enumerate(board):
+#         for i, m in enumerate(mark):
+#             if m == "O":
+#                 O_Arr.append([index + 1, i + 1])
+#             if m == "X":
+#                 X_Arr.append([index + 1, i + 1])
+
+#     for i in O_Arr:
+#         if not (i[0] == 1):
+#             loc_O.append((i[0] - 1) * 3 + i[1])
+#         else:
+#             loc_O.append(i[1])
+#     for i in X_Arr:
+#         if not (i[0] == 1):
+#             loc_X.append((i[0] - 1) * 3 + i[1])
+#         else:
+#             loc_X.append(i[1])
+
+#     for l in bingo:
+#         if any(loc_O[i : i + len(l)] == l for i in range(len(loc_O) - len(l) + 1)):
+#             O_flag = True
+#         if any(loc_X[i : i + len(l)] == l for i in range(len(loc_X) - len(l) + 1)):
+#             X_flag = True
+#     if O_flag and len(O_Arr)==len(X_Arr):
+#         answer= 0
+#     if X_flag and len(O_Arr) > len(X_Arr):
+#         answer = 0
+#     if len(O_Arr) < len(X_Arr) or len(O_Arr) - len(X_Arr) > 1 or (O_flag and X_flag):
+#         answer = 0
+#     return answer
+
+
+# board = ["O.X", ".O.", "..X"]
+
+# # board = ["OOO", "...", "XXX"]
+
+# print(solution(board))
+
+
+# //미로탈출 bfs
+# def solution(maps):
+#     start, lever, exit = None, None, None
+#     for i in range(len(maps)):
+#         for j in range(len(maps[0])):
+#             if maps[i][j] == "S":
+#                 start = (i, j)
+#             elif maps[i][j] == "L":
+#                 lever = (i, j)
+#             elif maps[i][j] == "E":
+#                 exit = (i, j)
+
+#     toLever = bfs(start, lever, maps)
+#     if toLever == -1:
+#         return -1
+#     toExit = bfs(lever, exit, maps)
+#     if toExit == -1:
+#         return -1
+#     return toLever + toExit
+
+
+# def bfs(start, target, maps):
+#     rows, cols = len(maps), len(maps[0])
+#     visited = [[False] * cols for _ in range(rows)]
+#     visited[start[0]][start[1]] = True
+
+#     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+#     queue = [(start[0], start[1], 0)]
+#     while queue:
+#         x, y, dist = queue.pop(0)
+#         if (x, y) == target:
+#             return dist
+
+#         for dx, dy in directions:
+#             nx, ny = x + dx, y + dy
+#             if (
+#                 0 <= nx < rows
+#                 and 0 <= ny < cols
+#                 and maps[nx][ny] != "X"
+#                 and not visited[nx][ny]
+#             ):
+#                 visited[nx][ny] = True
+#                 queue.append((nx, ny, dist + 1))
+#     return -1
+
+
+# # maps = ["SOOOL","XXXXO","OOOOO","OXXXX","OOOOE"]
+# # maps = ["LOOXS", "OOOOX", "OOOOO", "OOOOO", "EOOOO"]
+# # maps = ["SOOOL", "OXXXO", "OOOOO", "OXXXX", "OOOOE"]
+# maps = ["SOOOO", "OOOOO", "OLOOE", "OOOOO", "OOOOO"]
+# print(solution(maps))
+
+
+def max_meetings(meetings):
+    meetings.sort(key=lambda x: x[1])  # 종료 시간을 기준으로 정렬
+    end_time = 0
+    count = 0
+
+    for meeting in meetings:
+        if meeting[0] >= end_time:
+            end_time = meeting[1]
+            count += 1
+
+    return count
+
+meetings = [(1, 4), (2, 3), (3, 5), (6, 7), (8, 9)]
+print(max_meetings(meetings))
