@@ -11,11 +11,7 @@ def solution(book_time):
                 break
         else:
             rooms.append(e)
-             
         rooms.sort()
-
-
-    
     return len(rooms)
 
 

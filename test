@@ -403,17 +403,32 @@
 # print(solution(maps))
 
 
-def max_meetings(meetings):
-    meetings.sort(key=lambda x: x[1])  # 종료 시간을 기준으로 정렬
-    end_time = 0
-    count = 0
+# def max_meetings(meetings):
+#     meetings.sort(key=lambda x: x[1])  # 종료 시간을 기준으로 정렬
+#     end_time = 0
+#     count = 0
 
-    for meeting in meetings:
-        if meeting[0] >= end_time:
-            end_time = meeting[1]
-            count += 1
+#     for meeting in meetings:
+#         if meeting[0] >= end_time:
+#             end_time = meeting[1]
+#             count += 1
 
-    return count
+#     return count
 
-meetings = [(1, 4), (2, 3), (3, 5), (6, 7), (8, 9)]
-print(max_meetings(meetings))
+# meetings = [(1, 4), (2, 3), (3, 5), (6, 7), (8, 9)]
+# print(max_meetings(meetings))
+
+def solution(number, k):
+    answer = ''
+    stack = []
+    for i in number:
+        while stack and stack[-1]<i and k>0:
+            stack.pop()
+            k-=1
+        stack.append(i)
+
+    return ''.join(stack)
+
+number = "1231234"
+k = 3
+print(solution(number,k))
