@@ -1,0 +1,9 @@
+def solution(numbers):
+    answer = ''.join(sorted([str(i) for i in numbers],key = lambda x: x*4, reverse=True))
+    if len(answer) ==answer.count('0'):
+        answer = '0' 
+    return answer
+
+numbers = [3, 30, 34, 5, 9]
+
+print(solution( numbers))
