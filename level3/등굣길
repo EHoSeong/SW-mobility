@@ -1,0 +1,23 @@
+def solution(m, n, puddles):
+    share = 1000000007
+    dp = [[0] * (m) for _ in range(n)]
+
+    for puddle in puddles:
+        dp[puddle[1] - 1][puddle[0] - 1] = "X"
+
+    dp[0][0] = 1
+    for i in range(n):
+        for j in range(m):
+            if (i == 0 and j == 0) or dp[i][j] == "X":
+                continue
+            if dp[i - 1][j] != "X":
+                dp[i][j] += dp[i - 1][j] % share
+            if dp[i][j - 1] != "X":
+                dp[i][j] += dp[i][j - 1] % share
+    return dp[n - 1][m - 1] % share
+
+
+m = 4
+n = 3
+puddles = [[2, 2]]
+print(solution(m, n, puddles))
