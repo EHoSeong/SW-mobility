@@ -26,3 +26,4 @@ for _ in range(T):
         print(0)
     else:
         print(dfs(1))
+print(bridge)
